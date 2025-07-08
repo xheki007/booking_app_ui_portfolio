@@ -11,40 +11,46 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Explore Listings'),
-        centerTitle: true,
       ),
       body: Column(
         children: [
-          // Search bar
           Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(24)),
+            padding: const EdgeInsets.all(18),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white10),
+              ),
+              child: TextField(
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyle(color: Colors.white60),
+                  prefixIcon: const Icon(Icons.search, color: Colors.indigoAccent),
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.all(14),
+                ),
               ),
             ),
           ),
-          // Category chips
           SizedBox(
-            height: 40,
+            height: 44,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               children: [
-                Chip(label: Text('All')),
-                SizedBox(width: 8),
-                Chip(label: Text('Hotels')),
-                SizedBox(width: 8),
-                Chip(label: Text('Sports')),
-                SizedBox(width: 8),
-                Chip(label: Text('Appointments')),
+                _GlassChip(label: 'All'),
+                const SizedBox(width: 8),
+                _GlassChip(label: 'Hotels'),
+                const SizedBox(width: 8),
+                _GlassChip(label: 'Sports'),
+                const SizedBox(width: 8),
+                _GlassChip(label: 'Appointments'),
               ],
             ),
           ),
-          const SizedBox(height: 12),
-          // List of item cards
+          const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
               itemCount: dummyItems.length,
@@ -63,6 +69,21 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _GlassChip extends StatelessWidget {
+  final String label;
+  const _GlassChip({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      label: Text(label, style: const TextStyle(color: Colors.white)),
+      backgroundColor: Colors.white.withOpacity(0.13),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     );
   }
 }

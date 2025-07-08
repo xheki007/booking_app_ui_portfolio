@@ -13,9 +13,15 @@ class BookingApp extends StatelessWidget {
     return MaterialApp(
       title: 'Booking App UI Portfolio',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+      theme: ThemeData.dark().copyWith(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo, brightness: Brightness.dark),
         useMaterial3: true,
+        scaffoldBackgroundColor: const Color(0xFF232526),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF232526),
+          elevation: 0,
+          centerTitle: true,
+        ),
       ),
       home: const WelcomeScreen(),
     );

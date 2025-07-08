@@ -1,76 +1,57 @@
-# Booking App UI Portfolio (Flutter)
+# Booking App UI Portfolio (Flutter, Dark Mode)
 
-A next-gen booking experience, built 100% in Flutter – designed to impress clients, recruiters, and collaborators on Upwork, GitHub, or anywhere you showcase your skills.
+This is a modern booking app UI built with Flutter, designed to show clean, user-friendly interfaces in dark mode.  
+All screens are static and work with demo data only – the purpose is to present my design, code quality, and attention to detail for any future mobile app projects.
 
+---
+
+## Features
+
+- Explore listings on a simple Home Screen
+- See detailed info and book via the Details Screen
+- Book appointments easily: pick a date, time, and number of guests
+- Demo Admin Panel to manage bookings (UI only)
+- Welcome Screen to select user or admin demo
+
+---
+
+## Screenshots
+
+Welcome Screen  
 ![Welcome Screen](screenshots/welcome_screen.png)
+
+Home Screen  
 ![Home Screen](screenshots/home_screen.png)
+
+Details Screen  
 ![Details Screen](screenshots/details_screen.png)
+
+Booking Screen  
 ![Booking Screen](screenshots/booking_screen.png)
-![My Bookings Screen](screenshots/my_bookings_screen.png)
-![Admin Panel Screen](screenshots/admin_panel_screen.png)
+
+Admin Panel  
+![Admin Panel](screenshots/admin_panel_screen.png)
 
 ---
 
-## ✨ Features
+## Stack
 
-- **Material 3 design:** modern, calm colors & smooth animations
-- **5+ polished UI screens:** Welcome, Home, Details, Booking, My Bookings, Admin
-- **Demo data only:** All screens use hard-coded sample data for portfolio/demo
-- **Pixel-perfect & responsive:** Looks great on mobile and tablet
-- **Ready for customization:** Easy to adapt for any business case
-
----
-
-## 📱 Screenshots
-
-> *All screenshots were taken on real device emulators and framed with [shots.so](https://shots.so/) for a professional look!*
+- Flutter 3.x (Material 3)
+- Dart (null safety)
+- Modular code for easy extension
+- Designed for phone and tablet
 
 ---
 
-## ⚙️ Technology Stack
+## About
 
-- **Flutter 3.x+** (null safety)
-- **Dart**
-- **Material 3**, custom widgets, smooth transitions
+Hi!  
+My name is **Xhevdet Ferizi** – I’m a Flutter developer focused on simple, clean code and user-centered design.  
+I enjoy turning ideas into working, beautiful apps that people love to use. This booking app is just one example from my portfolio.
 
----
-
-## 💡 Project Purpose
-
-This app was built as a UI/UX portfolio project – every detail is carefully designed, every screen is fully responsive and production-ready.  
-No backend, no real booking logic – just beautiful user experience.
+If you’re looking for a developer who communicates clearly, cares about details, and delivers fast, let’s work together!
 
 ---
 
-## 🚀 Why Use This Template?
-
-- Shows real-world, business-grade UI
-- Instantly builds trust with clients: clean code, modern visuals, intuitive navigation
-- Easily adaptable: swap in your data, your brand, your business
-- Demo-ready: just add your backend or API integration!
-
----
-
-## 🔄 Customization
-
-- **Easy localization:** UI can be translated to any language on request
-- **Branding:** Colors, logos, and images can be quickly customized for your client or project
-- **Feature requests:** Want a real backend? Just ask!
-
----
-
-## 📝 FAQ
-
-**Is this a functional app?**  
-> This version is a UI prototype for demonstration purposes – backend integration is available on request.
-
-**Can you customize the design/branding?**  
-> Absolutely! The design is modular and can be tailored to any use-case.
-
-**Can you deliver a full app?**  
-> Yes – with real backend and any custom features you need.
-
----
-
-## 📂 File Structure (Clean Architecture)
-
+*All images and listings are for demo purposes only.  
+This project is UI only, no backend integration.*

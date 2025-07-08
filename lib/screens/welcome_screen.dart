@@ -8,92 +8,150 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo.shade50,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(28),
+      extendBodyBehindAppBar: true,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF232526),
+              Color(0xFF414345),
+            ],
+          ),
+        ),
+        width: double.infinity,
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // LOGO
               ClipRRect(
-                borderRadius: BorderRadius.circular(28),
+                borderRadius: BorderRadius.circular(24),
                 child: Image.network(
                   'https://cdn.logo.com/hotlink-ok/logo-social.png',
-                  height: 86,
-                  width: 86,
+                  height: 80,
+                  width: 80,
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 24),
-              const Text(
+              const SizedBox(height: 28),
+              Text(
                 'Booking App Portfolio',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.indigo,
+                  color: Colors.white.withOpacity(0.92),
                   letterSpacing: 1,
+                  shadows: [
+                    Shadow(
+                      color: Colors.black45,
+                      blurRadius: 8,
+                      offset: Offset(0, 2),
+                    )
+                  ],
                 ),
               ),
-              const SizedBox(height: 50),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  icon: const Icon(Icons.phone_android, color: Colors.white),
-                  label: const Text(
-                    "Booking Demo",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
+              const SizedBox(height: 42),
+              _GlassCard(
+                child: Column(
+                  children: [
+                    _ModernButton(
+                      icon: Icons.phone_android,
+                      label: "Booking Demo",
+                      color: Colors.indigoAccent,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const HomeScreen()),
+                        );
+                      },
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.indigo,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                    elevation: 2,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const HomeScreen()),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 18),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  icon: const Icon(Icons.admin_panel_settings, color: Colors.white),
-                  label: const Text(
-                    "Admin Demo",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                    const SizedBox(height: 18),
+                    _ModernButton(
+                      icon: Icons.admin_panel_settings,
+                      label: "Admin Demo",
+                      color: Colors.deepPurple,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const AdminPanelScreen()),
+                        );
+                      },
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey.shade900,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                    elevation: 2,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const AdminPanelScreen()),
-                    );
-                  },
+                  ],
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _GlassCard extends StatelessWidget {
+  final Widget child;
+  const _GlassCard({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 340,
+      padding: const EdgeInsets.all(28),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.10),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.18),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+        border: Border.all(color: Colors.white24, width: 1.2),
+      ),
+      child: child,
+    );
+  }
+}
+
+class _ModernButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _ModernButton({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 54,
+      child: ElevatedButton.icon(
+        icon: Icon(icon, color: Colors.white),
+        label: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            letterSpacing: 0.2,
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color.withOpacity(0.92),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          elevation: 6,
+          shadowColor: color.withOpacity(0.16),
+        ),
+        onPressed: onTap,
       ),
     );
   }

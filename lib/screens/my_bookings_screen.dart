@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/item.dart';
 
+// Modeli MyBooking (nëse nuk është tashmë në një file të përbashkët)
 class MyBooking {
   final Item item;
-  final String status; // p.sh. "Confirmed", "Pending", "Cancelled"
+  final String status; // "Confirmed", "Pending", "Cancelled"
   final DateTime date;
   final String time;
   final int guests;
@@ -17,7 +18,7 @@ class MyBooking {
   });
 }
 
-// Dummy data për rezervime
+// Dummy bookings
 final List<MyBooking> dummyBookings = [
   MyBooking(
     item: Item(
@@ -37,7 +38,7 @@ final List<MyBooking> dummyBookings = [
       id: '2',
       title: 'Borea Sports Center',
       location: 'Peja',
-      imageUrl: 'https://images.unsplash.com/photo-1465101178521-c1a9136a0b16?auto=format&fit=crop&w=600&q=80',
+      imageUrl: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80',
       price: 35.00,
     ),
     status: "Pending",
@@ -55,99 +56,106 @@ class MyBookingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Bookings'),
-        centerTitle: true,
       ),
       body: dummyBookings.isEmpty
           ? const Center(
               child: Text(
-                "Nuk keni asnjë rezervim.",
-                style: TextStyle(fontSize: 18, color: Colors.black54),
+                "No bookings yet.",
+                style: TextStyle(fontSize: 18, color: Colors.white70),
               ),
             )
           : ListView.builder(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(18),
               itemCount: dummyBookings.length,
               itemBuilder: (ctx, i) {
                 final booking = dummyBookings[i];
-                return Card(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                  elevation: 2,
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.09),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.13),
+                        blurRadius: 12,
+                        offset: const Offset(0, 7),
+                      ),
+                    ],
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Fotoja e item-it dhe titulli
                       ClipRRect(
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                         child: Image.network(
                           booking.item.imageUrl,
-                          height: 120,
+                          height: 110,
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(18),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               booking.item.title,
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Colors.white, fontWeight: FontWeight.w600),
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 6),
                             Row(
                               children: [
-                                Icon(Icons.location_on, size: 18, color: Colors.indigo.shade400),
+                                Icon(Icons.location_on, size: 18, color: Colors.indigoAccent),
                                 const SizedBox(width: 4),
                                 Text(
                                   booking.item.location,
-                                  style: const TextStyle(color: Colors.black54, fontSize: 15),
+                                  style: const TextStyle(color: Colors.white70, fontSize: 15),
                                 ),
                                 const Spacer(),
                                 _StatusChip(status: booking.status),
                               ],
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 12),
                             Row(
                               children: [
-                                Icon(Icons.calendar_today, size: 16, color: Colors.indigo.shade300),
+                                Icon(Icons.calendar_today, size: 16, color: Colors.indigoAccent),
                                 const SizedBox(width: 4),
                                 Text(
                                   "${booking.date.day}/${booking.date.month}/${booking.date.year}",
-                                  style: const TextStyle(fontSize: 15),
+                                  style: const TextStyle(fontSize: 15, color: Colors.white),
                                 ),
                                 const SizedBox(width: 16),
-                                Icon(Icons.schedule, size: 16, color: Colors.indigo.shade300),
+                                Icon(Icons.schedule, size: 16, color: Colors.indigoAccent),
                                 const SizedBox(width: 4),
                                 Text(
                                   booking.time,
-                                  style: const TextStyle(fontSize: 15),
+                                  style: const TextStyle(fontSize: 15, color: Colors.white),
                                 ),
                                 const SizedBox(width: 16),
-                                Icon(Icons.group, size: 16, color: Colors.indigo.shade300),
+                                Icon(Icons.group, size: 16, color: Colors.indigoAccent),
                                 const SizedBox(width: 4),
                                 Text(
                                   "${booking.guests} guests",
-                                  style: const TextStyle(fontSize: 15),
+                                  style: const TextStyle(fontSize: 15, color: Colors.white),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 16),
-                            // Butoni "Cancel" vetëm në UI
                             if (booking.status == "Confirmed" || booking.status == "Pending")
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton.icon(
                                   style: TextButton.styleFrom(
-                                    foregroundColor: Colors.red,
+                                    foregroundColor: Colors.redAccent,
                                   ),
                                   icon: const Icon(Icons.cancel),
                                   label: const Text("Cancel"),
                                   onPressed: () {
-                                    // Vetëm UI: s'bën asgjë, vetëm për demo
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Kjo është vetëm UI demo!')),
+                                      const SnackBar(content: Text('This is a demo UI only!')),
                                     );
                                   },
                                 ),
@@ -164,7 +172,7 @@ class MyBookingsScreen extends StatelessWidget {
   }
 }
 
-// StatusChip: ngjyrë sipas statusit
+// StatusChip dark, elegant
 class _StatusChip extends StatelessWidget {
   final String status;
   const _StatusChip({required this.status});
@@ -174,22 +182,22 @@ class _StatusChip extends StatelessWidget {
     Color color;
     switch (status) {
       case "Confirmed":
-        color = Colors.green;
+        color = Colors.greenAccent.shade400;
         break;
       case "Pending":
-        color = Colors.orange;
+        color = Colors.orangeAccent;
         break;
       case "Cancelled":
-        color = Colors.red;
+        color = Colors.redAccent;
         break;
       default:
         color = Colors.grey;
     }
     return Chip(
-      label: Text(status),
-      backgroundColor: color.withOpacity(0.12),
-      labelStyle: TextStyle(color: color, fontWeight: FontWeight.w600),
+      label: Text(status, style: TextStyle(color: color, fontWeight: FontWeight.w600)),
+      backgroundColor: color.withOpacity(0.13),
       padding: const EdgeInsets.symmetric(horizontal: 10),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     );
   }
 }
